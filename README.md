@@ -1464,7 +1464,7 @@ copies or substantial portions of the Software.
 
 <img src="https://avatars.githubusercontent.com/yuva-1237" width="100px" style="border-radius:50%" alt="Author Avatar" />
 
-### **Yuvan**
+### **Yuvathilagan**
 *Full Stack Developer · AI Engineer · Open Source Contributor*
 
 [![GitHub](https://img.shields.io/badge/GitHub-@yuva--1237-181717?style=for-the-badge&logo=github)](https://github.com/yuva-1237)

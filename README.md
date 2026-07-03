@@ -31,7 +31,7 @@
 
 <br />
 
-[🌐 Live Demo](#live-demo) · [📖 Documentation](#api-documentation) · [🐛 Report Bug](https://github.com/yuva-1237/SkySense-AI/issues) · [💡 Request Feature](https://github.com/yuva-1237/SkySense-AI/issues)
+[📖 Documentation](#api-documentation) · [🐛 Report Bug](https://github.com/yuva-1237/SkySense-AI/issues) · [💡 Request Feature](https://github.com/yuva-1237/SkySense-AI/issues)
 
 </div>
 
@@ -40,7 +40,6 @@
 ## 📋 Table of Contents
 
 - [🌤️ SkySense AI](#️-skysense-ai)
-- [🚀 Live Demo](#-live-demo)
 - [📖 About The Project](#-about-the-project)
 - [✨ Features](#-features)
 - [🛠️ Technologies Used](#️-technologies-used)
@@ -50,7 +49,6 @@
 - [🔐 Environment Variables](#-environment-variables)
 - [📖 Usage Guide](#-usage-guide)
 - [📸 Screenshots](#-screenshots)
-- [🎬 Demo](#-demo)
 - [📡 API Documentation](#-api-documentation)
 - [🤖 AI Assistant](#-ai-assistant)
 - [🌦️ Weather Data Pipeline](#️-weather-data-pipeline)
@@ -66,17 +64,6 @@
 - [📄 License](#-license)
 - [👤 Author](#-author)
 - [🙏 Acknowledgements](#-acknowledgements)
-
----
-
-## 🚀 Live Demo
-
-| Resource | Link |
-|---|---|
-| 🌐 **Live Website** | [https://skysense-ai.vercel.app](https://skysense-ai.vercel.app) *(placeholder)* |
-| 💻 **GitHub Repository** | [https://github.com/yuva-1237/SkySense-AI](https://github.com/yuva-1237/SkySense-AI) |
-| 🎬 **Demo Video** | [https://youtu.be/your-demo-video](https://youtu.be/your-demo-video) *(placeholder)* |
-| 🖥️ **Backend API** | [https://skysense-api.render.com](https://skysense-api.render.com) *(placeholder)* |
 
 ---
 
@@ -680,8 +667,6 @@ FIREBASE_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE
 2. Review allergen levels, air contaminants, and UV radiation risk
 3. Get personalized health advice for current conditions
 
----
-
 ## 📸 Screenshots
 
 Here are the actual application views of SkySense AI showing its dark glassmorphism layout and modern aesthetics:
@@ -695,6 +680,18 @@ Detailed weather report for London with temperature line charts, UV index gauges
 ### 📊 Dashboard View (Manchester)
 Initial default view displaying live weather observations, air quality parameters, allergen lists, and farming insights for Manchester:
 ![Manchester Dashboard](docs/screenshots/dashboard.png)
+
+---
+
+### 🗺️ Interactive Weather Maps
+Interactive geographic overlay map showing real-time atmospheric data:
+![Interactive Map](docs/screenshots/map.png)
+
+---
+
+### 🤖 AI Assistant Chat View
+Conversational AI chat interface grounded in live weather reports with speech recognition input:
+![AI Chatbot](docs/screenshots/chat.png)
 
 ---
 

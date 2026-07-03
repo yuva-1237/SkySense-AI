@@ -1522,8 +1522,8 @@ copies or substantial portions of the Software.
 *Full Stack Developer · AI Engineer · Open Source Contributor*
 
 [![GitHub](https://img.shields.io/badge/GitHub-@yuva--1237-181717?style=for-the-badge&logo=github)](https://github.com/yuva-1237)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/yuvathilagan)
-[![Email](https://img.shields.io/badge/Email-yuva1237@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:yuva1237@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/yuvathilagan-%E2%80%8C-806681308/)
+[![Email](https://img.shields.io/badge/Email-yuvathilagan@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:yuvathilagan@gmail.com)
 
 > *"Building intelligent systems that make sense of the world — one API call at a time."*
 

@@ -24,14 +24,14 @@
 
 <br />
 
-[![Stars](https://img.shields.io/github/stars/yourusername/SkySense-AI?style=social)](https://github.com/yourusername/SkySense-AI)
-[![Forks](https://img.shields.io/github/forks/yourusername/SkySense-AI?style=social)](https://github.com/yourusername/SkySense-AI/fork)
-[![Issues](https://img.shields.io/github/issues/yourusername/SkySense-AI?style=flat-square)](https://github.com/yourusername/SkySense-AI/issues)
-[![Contributors](https://img.shields.io/github/contributors/yourusername/SkySense-AI?style=flat-square)](https://github.com/yourusername/SkySense-AI/graphs/contributors)
+[![Stars](https://img.shields.io/github/stars/yuva-1237/SkySense-AI?style=social)](https://github.com/yuva-1237/SkySense-AI)
+[![Forks](https://img.shields.io/github/forks/yuva-1237/SkySense-AI?style=social)](https://github.com/yuva-1237/SkySense-AI/fork)
+[![Issues](https://img.shields.io/github/issues/yuva-1237/SkySense-AI?style=flat-square)](https://github.com/yuva-1237/SkySense-AI/issues)
+[![Contributors](https://img.shields.io/github/contributors/yuva-1237/SkySense-AI?style=flat-square)](https://github.com/yuva-1237/SkySense-AI/graphs/contributors)
 
 <br />
 
-[🌐 Live Demo](#live-demo) · [📖 Documentation](#api-documentation) · [🐛 Report Bug](https://github.com/yourusername/SkySense-AI/issues) · [💡 Request Feature](https://github.com/yourusername/SkySense-AI/issues)
+[🌐 Live Demo](#live-demo) · [📖 Documentation](#api-documentation) · [🐛 Report Bug](https://github.com/yuva-1237/SkySense-AI/issues) · [💡 Request Feature](https://github.com/yuva-1237/SkySense-AI/issues)
 
 </div>
 
@@ -74,7 +74,7 @@
 | Resource | Link |
 |---|---|
 | 🌐 **Live Website** | [https://skysense-ai.vercel.app](https://skysense-ai.vercel.app) *(placeholder)* |
-| 💻 **GitHub Repository** | [https://github.com/yourusername/SkySense-AI](https://github.com/yourusername/SkySense-AI) |
+| 💻 **GitHub Repository** | [https://github.com/yuva-1237/SkySense-AI](https://github.com/yuva-1237/SkySense-AI) |
 | 🎬 **Demo Video** | [https://youtu.be/your-demo-video](https://youtu.be/your-demo-video) *(placeholder)* |
 | 🖥️ **Backend API** | [https://skysense-api.render.com](https://skysense-api.render.com) *(placeholder)* |
 
@@ -684,67 +684,29 @@ FIREBASE_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE
 
 ## 📸 Screenshots
 
-> **📌 Note:** Add your own screenshots to the `docs/screenshots/` directory. The paths below are standard placeholders.
+Here are the actual application views of SkySense AI showing its dark glassmorphism layout and modern aesthetics:
 
-### 🏠 Home / Landing
-
-| ![Home Screen](docs/screenshots/home.png) |
-|:---:|
-| *Landing page with atmospheric glassmorphism design* |
-
-### 📊 Dashboard
-
-| ![Dashboard](docs/screenshots/dashboard.png) |
-|:---:|
-| *Real-time weather dashboard with hourly + 7-day Chart.js visualizations* |
-
-### 🌡️ Current Weather
-
-| ![Weather](docs/screenshots/weather.png) |
-|:---:|
-| *Current conditions panel — temperature, AQI, UV, wind, humidity* |
-
-### 🗺️ Interactive Map
-
-| ![Map](docs/screenshots/map.png) |
-|:---:|
-| *Leaflet.js weather map with rain/cloud/wind overlays and marker clustering* |
-
-### 🤖 AI Chat Assistant
-
-| ![Chat](docs/screenshots/chat.png) |
-|:---:|
-| *AI assistant streaming live, grounded weather responses* |
-
-### 👤 Profile & Settings
-
-| ![Profile](docs/screenshots/profile.png) |
-|:---:|
-| *User profile with saved locations and preferences* |
-
-### ⚙️ Settings Panel
-
-| ![Settings](docs/screenshots/settings.png) |
-|:---:|
-| *Settings — temperature unit, default city, notification preferences* |
-
-### 📱 Mobile View
-
-| ![Mobile](docs/screenshots/mobile.png) |
-|:---:|
-| *Fully responsive mobile layout (375px+)* |
-
-> 💡 **How to add screenshots:** Run the app, take screenshots, and save them to `docs/screenshots/` using the filenames above.
+### 🏠 Home View (London)
+Detailed weather report for London with temperature line charts, UV index gauges, wind speed gauges, and real-time precipitation breakdowns:
+![London Dashboard](docs/screenshots/home.png)
 
 ---
 
-## 🎬 Demo
+### 📊 Dashboard View (Manchester)
+Initial default view displaying live weather observations, air quality parameters, allergen lists, and farming insights for Manchester:
+![Manchester Dashboard](docs/screenshots/dashboard.png)
 
-| ![Demo GIF](docs/demo.gif) |
-|:---:|
-| *End-to-end walkthrough: Search → Dashboard → AI Chat → Map* |
+---
 
-> 💡 **How to add demo:** Record your screen using OBS Studio, Loom, or any GIF recorder. Export as `docs/demo.gif`.
+### 🔐 Sign In Portal
+Secure email/password and single sign-on Google popup authentication modal:
+![Sign In](docs/screenshots/login.png)
+
+---
+
+### 👤 Registration Screen
+User creation screen with inputs validating name, email, and password strength:
+![Registration](docs/screenshots/register.png)
 
 ---
 
@@ -1500,15 +1462,14 @@ copies or substantial portions of the Software.
 
 <div align="center">
 
-<img src="https://avatars.githubusercontent.com/yourusername" width="100px" style="border-radius:50%" alt="Author Avatar" />
+<img src="https://avatars.githubusercontent.com/yuva-1237" width="100px" style="border-radius:50%" alt="Author Avatar" />
 
-### **[Your Name]**
+### **Yuvan**
 *Full Stack Developer · AI Engineer · Open Source Contributor*
 
-[![GitHub](https://img.shields.io/badge/GitHub-@yourusername-181717?style=for-the-badge&logo=github)](https://github.com/yourusername)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/yourusername)
-[![Portfolio](https://img.shields.io/badge/Portfolio-yoursite.dev-FF5733?style=for-the-badge&logo=google-chrome&logoColor=white)](https://yoursite.dev)
-[![Email](https://img.shields.io/badge/Email-you@email.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:you@email.com)
+[![GitHub](https://img.shields.io/badge/GitHub-@yuva--1237-181717?style=for-the-badge&logo=github)](https://github.com/yuva-1237)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/yuva-1237)
+[![Email](https://img.shields.io/badge/Email-yuva1237@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:yuva1237@gmail.com)
 
 > *"Building intelligent systems that make sense of the world — one API call at a time."*
 
@@ -1542,7 +1503,7 @@ This project was made possible by the following incredible technologies and team
 
 **⭐ If SkySense AI helped you or inspired you, please give it a star! ⭐**
 
-[![Star this repo](https://img.shields.io/github/stars/yourusername/SkySense-AI?style=social)](https://github.com/yourusername/SkySense-AI)
+[![Star this repo](https://img.shields.io/github/stars/yuva-1237/SkySense-AI?style=social)](https://github.com/yuva-1237/SkySense-AI)
 
 *Made with ❤️ and ☁️ weather data*
 

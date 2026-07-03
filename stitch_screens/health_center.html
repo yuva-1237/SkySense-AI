@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkySense AI - Health Center &amp; Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#38bdf8",
+                        "surface-container-lowest": "#060e20",
+                        "on-surface": "#dae2fd",
+                        "secondary-fixed": "#e0e0ff",
+                        "on-primary": "#00354a",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "outline-variant": "#3e484f",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#bdc2ff",
+                        "on-secondary-fixed-variant": "#2f3aa3",
+                        "surface-container-high": "#222a3d",
+                        "surface": "#0b1326",
+                        "on-secondary": "#131e8c",
+                        "on-primary-container": "#004965",
+                        "on-surface-variant": "#bdc8d1",
+                        "surface-container": "#171f33",
+                        "on-primary-fixed-variant": "#004c69",
+                        "on-tertiary-container": "#584000",
+                        "inverse-surface": "#dae2fd",
+                        "inverse-primary": "#00668a",
+                        "surface-variant": "#2d3449",
+                        "on-secondary-fixed": "#000767",
+                        "surface-tint": "#7bd0ff",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#dae2fd",
+                        "on-tertiary": "#402d00",
+                        "primary": "#8ed5ff",
+                        "tertiary-fixed": "#ffdf9f",
+                        "on-tertiary-fixed": "#261a00",
+                        "tertiary": "#ffc42f",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#7bd0ff",
+                        "on-primary-fixed": "#001e2c",
+                        "tertiary-fixed-dim": "#f9bd22",
+                        "outline": "#87929a",
+                        "surface-bright": "#31394d",
+                        "error-container": "#93000a",
+                        "secondary": "#bdc2ff",
+                        "background": "#0b1326",
+                        "tertiary-container": "#e1a800",
+                        "surface-dim": "#0b1326",
+                        "surface-container-low": "#131b2e",
+                        "on-secondary-container": "#a8afff",
+                        "primary-fixed": "#c4e7ff",
+                        "secondary-container": "#2f3aa3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "stack-lg": "2rem",
+                        "container-margin": "2rem",
+                        "gutter": "1.5rem",
+                        "stack-md": "1rem",
+                        "stack-sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap');
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ambient-bg {
+            background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, rgba(11, 19, 38, 1) 50%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md ambient-bg min-h-screen flex flex-col md:flex-row selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 h-16 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-md transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold tracking-tight text-primary">SkySense AI</span>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined cursor-pointer hover:bg-white/5 p-2 rounded-full transition-colors" data-icon="search">search</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-white/5 p-2 rounded-full transition-colors" data-icon="menu">menu</span>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-screen w-64 flex-col z-40 bg-surface-container/60 backdrop-blur-2xl border-r border-white/10 shadow-2xl">
+<div class="p-6 border-b border-white/10 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="cloud">cloud</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">SkySense AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Weather Intelligence</p>
+</div>
+</div>
+<div class="flex-1 py-6 overflow-y-auto space-y-2">
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-white/10 transition-colors px-4 py-3 duration-200 ease-out mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-white/10 transition-colors px-4 py-3 duration-200 ease-out mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Maps</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-white/10 transition-colors px-4 py-3 duration-200 ease-out mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-4 bg-primary-container/20 text-primary-container border-r-4 border-primary-container px-4 py-3 duration-200 ease-out mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="health_and_safety" data-weight="fill">health_and_safety</span>
+<span class="font-label-md text-label-md">Health Center</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-white/10 transition-colors px-4 py-3 duration-200 ease-out mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="flight">flight</span>
+<span class="font-label-md text-label-md">Travel Mode</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-white/10 transition-colors px-4 py-3 duration-200 ease-out mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="agriculture">agriculture</span>
+<span class="font-label-md text-label-md">Farmer Mode</span>
+</a>
+</div>
+<div class="p-6 border-t border-white/10 space-y-4">
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(56,189,248,0.3)]">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                AI Assistant
+            </button>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-white/10 transition-colors px-4 py-2 rounded-lg duration-200 ease-out" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-white/10 transition-colors px-4 py-2 rounded-lg duration-200 ease-out" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 pt-20 md:pt-8 p-4 md:p-8 overflow-x-hidden">
+<!-- Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Health Center &amp; Analytics</h2>
+<p class="text-on-surface-variant mt-2 font-body-lg text-body-lg">Comprehensive environmental impact analysis for New York City.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="glass-card rounded-full px-4 py-2 flex items-center gap-2 cursor-pointer hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md text-label-md text-on-surface">Today, Oct 24</span>
+</div>
+<div class="glass-card rounded-full px-4 py-2 flex items-center gap-2 cursor-pointer hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<span class="font-label-md text-label-md text-on-surface">New York City</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Left Column: AQI & Warnings (Col 1-8) -->
+<div class="md:col-span-8 flex flex-col gap-6">
+<!-- Primary AQI Card -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-error/10 blur-[80px] rounded-full -mr-20 -mt-20 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="air">air</span>
+                                Air Quality Index (AQI)
+                            </h3>
+<p class="text-on-surface-variant font-label-md text-label-md mt-1">Real-time atmospheric analysis</p>
+</div>
+<div class="bg-error/20 border border-error/30 text-error px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                            Unhealthy for Sensitive Groups
+                        </div>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-8 mb-8 relative z-10">
+<!-- Main Gauge (Simulated with SVG) -->
+<div class="relative w-48 h-48 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.1)" stroke-dasharray="283" stroke-dashoffset="0" stroke-width="8"></circle>
+<circle class="text-error" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-dasharray="283" stroke-dashoffset="113" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-display-lg text-display-lg text-on-surface">124</span>
+<span class="font-label-sm text-label-sm text-error font-bold uppercase tracking-widest mt-1">PM2.5 High</span>
+</div>
+</div>
+<!-- Pollutant Grid -->
+<div class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
+<div class="bg-surface-variant/30 rounded-lg p-3 border border-white/5 hover:bg-white/5 transition-colors">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">PM2.5</div>
+<div class="font-headline-md text-headline-md text-error">45.2 <span class="text-xs text-on-surface-variant">µg/m³</span></div>
+</div>
+<div class="bg-surface-variant/30 rounded-lg p-3 border border-white/5 hover:bg-white/5 transition-colors">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">PM10</div>
+<div class="font-headline-md text-headline-md text-tertiary">82.1 <span class="text-xs text-on-surface-variant">µg/m³</span></div>
+</div>
+<div class="bg-surface-variant/30 rounded-lg p-3 border border-white/5 hover:bg-white/5 transition-colors">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">O3 (Ozone)</div>
+<div class="font-headline-md text-headline-md text-primary">32.0 <span class="text-xs text-on-surface-variant">ppb</span></div>
+</div>
+<div class="bg-surface-variant/30 rounded-lg p-3 border border-white/5 hover:bg-white/5 transition-colors">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">NO2</div>
+<div class="font-headline-md text-headline-md text-primary">18.4 <span class="text-xs text-on-surface-variant">ppb</span></div>
+</div>
+<div class="bg-surface-variant/30 rounded-lg p-3 border border-white/5 hover:bg-white/5 transition-colors">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">SO2</div>
+<div class="font-headline-md text-headline-md text-primary">1.2 <span class="text-xs text-on-surface-variant">ppb</span></div>
+</div>
+<div class="bg-surface-variant/30 rounded-lg p-3 border border-white/5 hover:bg-white/5 transition-colors">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">CO</div>
+<div class="font-headline-md text-headline-md text-primary">450 <span class="text-xs text-on-surface-variant">ppb</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Health Warnings -->
+<div class="glass-card rounded-xl p-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="warning">warning</span>
+                        Smart Health Alerts
+                    </h3>
+<div class="space-y-4">
+<div class="bg-error-container/20 border-l-4 border-error p-4 rounded-r-lg flex items-start gap-4">
+<span class="material-symbols-outlined text-error mt-1" data-icon="coronavirus">coronavirus</span>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-error">High Pollen Alert (Ragweed)</h4>
+<p class="text-on-surface-variant font-body-md text-body-md text-sm mt-1">Allergy sufferers should limit outdoor activities. Keep windows closed and run air purifiers if available.</p>
+</div>
+</div>
+<div class="bg-tertiary-container/10 border-l-4 border-tertiary p-4 rounded-r-lg flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary mt-1" data-icon="group">group</span>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-tertiary">Sensitive Groups Caution</h4>
+<p class="text-on-surface-variant font-body-md text-body-md text-sm mt-1">Elevated PM2.5 levels may affect those with asthma or respiratory conditions. Consider wearing a KN95 mask outdoors.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Life Recommendations & Widgets (Col 9-12) -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<!-- Life Recommendations -->
+<div class="glass-card rounded-xl p-6 flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="recommend">recommend</span>
+                        Recommendations
+                    </h3>
+<div class="space-y-4">
+<!-- Clothing -->
+<div class="bg-surface-variant/40 rounded-lg p-4 border border-white/5 flex items-center gap-4 hover:bg-surface-variant/60 transition-colors">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary-container" data-icon="checkroom">checkroom</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Light Layers</h4>
+<p class="text-on-surface-variant text-xs mt-1">Cool morning, warming up rapidly. Bring a light jacket.</p>
+</div>
+</div>
+<!-- Outdoor Activity -->
+<div class="bg-error/10 rounded-lg p-4 border border-error/20 flex items-center gap-4 hover:bg-error/20 transition-colors">
+<div class="w-12 h-12 rounded-full bg-error/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-error" data-icon="directions_run">directions_run</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Limit Heavy Exertion</h4>
+<p class="text-on-surface-variant text-xs mt-1">Due to high AQI, avoid intense cardiovascular outdoor workouts today.</p>
+</div>
+</div>
+<!-- Hydration -->
+<div class="bg-surface-variant/40 rounded-lg p-4 border border-white/5 flex items-center gap-4 hover:bg-surface-variant/60 transition-colors">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary-container" data-icon="water_drop">water_drop</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Normal Hydration</h4>
+<p class="text-on-surface-variant text-xs mt-1">Humidity is moderate. Drink water regularly.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Small Widget Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-card rounded-xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-tertiary mb-2 text-3xl" data-icon="brightness_high">brightness_high</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">UV Index</span>
+<span class="font-headline-md text-headline-md text-on-surface mt-1">6 <span class="text-sm text-tertiary">High</span></span>
+</div>
+<div class="glass-card rounded-xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-error mb-2 text-3xl" data-icon="thermostat">thermostat</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Heat Index</span>
+<span class="font-headline-md text-headline-md text-on-surface mt-1">82°</span>
+</div>
+</div>
+</div>
+<!-- Full Width Analytics Chart (Col 1-12) -->
+<div class="md:col-span-12 glass-card rounded-xl p-6 relative overflow-hidden mt-2">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="insights">insights</span>
+                            Temperature &amp; Humidity Trends
+                        </h3>
+<p class="text-on-surface-variant font-label-md text-label-md mt-1">48-Hour Historical and Predicted Analysis</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary/10 text-primary border border-primary/30 px-4 py-1.5 rounded-full font-label-sm text-label-sm hover:bg-primary/20 transition-colors">48H</button>
+<button class="bg-transparent text-on-surface-variant border border-white/10 px-4 py-1.5 rounded-full font-label-sm text-label-sm hover:bg-white/5 transition-colors">7D</button>
+</div>
+</div>
+<!-- Simulated Chart Area using CSS Gradients & SVG for aesthetic representation -->
+<div class="h-64 w-full relative">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="border-t border-white/5 w-full h-0"></div>
+</div></div></div></div></main></body></html>

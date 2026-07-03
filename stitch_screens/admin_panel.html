@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkySense AI | Enterprise Admin Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+        
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #0b1326;
+            color: #dae2fd;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(23, 31, 51, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .status-pulse {
+            position: relative;
+        }
+        .status-pulse::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: currentColor;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(142, 213, 255, 0.2);
+            border-radius: 10px;
+        }
+        
+        .map-gradient {
+            background: radial-gradient(circle at center, rgba(142, 213, 255, 0.05) 0%, rgba(11, 19, 38, 0) 70%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#8ed5ff",
+                        "surface-container-highest": "#2d3449",
+                        "surface-container-lowest": "#060e20",
+                        "tertiary-fixed-dim": "#f9bd22",
+                        "on-tertiary": "#402d00",
+                        "on-primary": "#00354a",
+                        "secondary": "#bdc2ff",
+                        "background": "#0b1326",
+                        "on-secondary-fixed-variant": "#2f3aa3",
+                        "secondary-container": "#2f3aa3",
+                        "surface-container": "#171f33",
+                        "primary-container": "#38bdf8",
+                        "outline-variant": "#3e484f",
+                        "tertiary-container": "#e1a800",
+                        "on-surface": "#dae2fd",
+                        "on-primary-container": "#004965",
+                        "secondary-fixed-dim": "#bdc2ff",
+                        "on-secondary-container": "#a8afff",
+                        "on-primary-fixed": "#001e2c",
+                        "surface-container-high": "#222a3d",
+                        "surface-container-low": "#131b2e",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "on-tertiary-fixed": "#261a00",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#dae2fd",
+                        "surface-tint": "#7bd0ff",
+                        "on-error": "#690005",
+                        "surface-dim": "#0b1326",
+                        "primary-fixed": "#c4e7ff",
+                        "outline": "#87929a",
+                        "on-secondary-fixed": "#000767",
+                        "error-container": "#93000a",
+                        "tertiary": "#ffc42f",
+                        "inverse-primary": "#00668a",
+                        "on-surface-variant": "#bdc8d1",
+                        "surface-variant": "#2d3449",
+                        "on-tertiary-container": "#584000",
+                        "primary-fixed-dim": "#7bd0ff",
+                        "secondary-fixed": "#e0e0ff",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#004c69",
+                        "tertiary-fixed": "#ffdf9f",
+                        "surface-bright": "#31394d",
+                        "on-secondary": "#131e8c",
+                        "on-background": "#dae2fd",
+                        "surface": "#0b1326"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "2rem",
+                        "stack-sm": "0.5rem",
+                        "gutter": "1.5rem",
+                        "stack-md": "1rem",
+                        "stack-lg": "2rem",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-md": ["Geist"],
+                        "display-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Background Layer -->
+<div class="fixed inset-0 z-0">
+
+<div class="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background"></div>
+</div>
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col z-40 glass-panel border-r border-white/10">
+<div class="p-6 flex flex-col gap-1">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">SkySense AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Weather Intelligence</p>
+</div>
+<nav class="flex-1 px-4 mt-6 space-y-2">
+<a class="bg-primary-container/20 text-primary border-r-4 border-primary px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md">Maps</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-md text-label-md">Health Center</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined">flight</span>
+<span class="font-label-md text-label-md">Travel Mode</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined">agriculture</span>
+<span class="font-label-md text-label-md">Farmer Mode</span>
+</a>
+</nav>
+<div class="p-4 flex flex-col gap-2">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined">auto_awesome</span>
+                AI Assistant
+            </button>
+<div class="mt-4 pt-4 border-t border-white/5 space-y-1">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-2 flex items-center gap-3 text-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+                    Settings
+                </a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-2 flex items-center gap-3 text-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                    Support
+                </a>
+</div>
+</div>
+</aside>
+<!-- Top Navigation -->
+<header class="fixed top-0 right-0 left-64 h-16 glass-panel border-b border-white/10 z-30 flex items-center justify-between px-8">
+<div class="flex items-center gap-6">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="bg-white/5 border-none rounded-full pl-10 pr-4 py-2 text-sm w-full focus:ring-1 focus:ring-primary placeholder:text-on-surface-variant/50" placeholder="Search system resources..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-sm font-label-md border-l border-white/10 pl-6">
+<span class="text-on-surface-variant">Active Instances: <span class="text-primary">24</span></span>
+<span class="text-on-surface-variant">Queue: <span class="text-tertiary">0.02ms</span></span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-white/5 transition-colors relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-background"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">schedule</span>
+</button>
+<div class="h-8 w-[1px] bg-white/10 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-sm font-bold text-on-surface">Alex Mercer</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">System Admin</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-primary/30" data-alt="A professional headshot of a young male systems administrator with short dark hair and a confident expression, wearing a navy blue blazer, set against a blurred high-tech control room background with subtle blue and white lighting accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYAKxUAQni5KioquHUp2oDjw_K6C6iGkIwNhJfgS5T_IR2RwPjfty-BsB7juQ8TH7vg3Mcd2YwojwLP0BCPI24NhdDl4nhblRF9-iXsTjNEk-j8FPY9qPNHIOByWPIKe6qgfVB8GzLzms8--svmDZ8teOrtsj0NDbyuw19758Iajysiwj1kVfnLg_ZzUmGVEGfHHNJ8RhNnDtcKG7jyFnpjYHhXtgYYGSo93KJxnpZNE_WpMOxdqZbsDtYfsegmMEIXIWCt7h_YPc"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 px-8 pb-12 relative z-10 flex-1">
+<!-- System Health Header -->
+<section class="mb-8 grid grid-cols-1 lg:grid-cols-4 gap-4">
+<div class="col-span-3 glass-panel rounded-xl p-5 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<span class="text-success w-2 h-2 rounded-full bg-emerald-400 status-pulse"></span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">WeatherAPI</p>
+<p class="text-sm font-medium">99.98% Operational</p>
+</div>
+</div>
+<div class="h-8 w-[1px] bg-white/10"></div>
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-emerald-400 status-pulse"></span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">OpenWeather</p>
+<p class="text-sm font-medium">Operational</p>
+</div>
+</div>
+<div class="h-8 w-[1px] bg-white/10"></div>
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-emerald-400 status-pulse"></span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Maps Engine</p>
+<p class="text-sm font-medium">Healthy</p>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Uptime (30d)</p>
+<p class="text-headline-md font-bold text-primary">99.99<span class="text-sm font-medium text-on-surface-variant">%</span></p>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-5 flex items-center gap-4 border-l-4 border-tertiary">
+<span class="material-symbols-outlined text-tertiary text-3xl">warning</span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Active Alerts</p>
+<p class="text-sm font-bold">2 High Priority</p>
+</div>
+<button class="ml-auto text-xs font-bold text-primary hover:underline">View</button>
+</div>
+</section>
+<!-- KPI Cards -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl">group</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-md mb-1">Total Registered Users</p>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold">1,248,302</h3>
+<span class="text-emerald-400 text-sm flex items-center mb-1"><span class="material-symbols-outlined text-[16px]">trending_up</span> 12%</span>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl">bolt</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-md mb-1">Active Sessions</p>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold">18,521</h3>
+<span class="text-primary text-sm flex items-center mb-1"><span class="material-symbols-outlined text-[16px]">radio_button_checked</span> Live</span>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl">database</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-md mb-1">API Requests (24h)</p>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold">42.8M</h3>
+<span class="text-emerald-400 text-sm flex items-center mb-1"><span class="material-symbols-outlined text-[16px]">trending_up</span> 4%</span>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl">memory</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-md mb-1">System Load</p>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold">34%</h3>
+<div class="w-full h-1 bg-white/10 rounded-full mb-3 ml-4 max-w-[80px]">
+<div class="w-[34%] h-full bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Layout Main Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Traffic Chart -->
+<div class="lg:col-span-2 glass-panel rounded-2xl p-6 flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-xl font-bold text-on-surface">API Traffic &amp; Performance</h2>
+<p class="text-sm text-on-surface-variant">Real-time request distribution by provider</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-primary text-on-primary rounded text-xs font-bold">24h</button>
+<button class="px-3 py-1 hover:bg-white/5 text-on-surface-variant rounded text-xs font-bold transition-colors">7d</button>
+</div>
+</div>
+<div class="flex-1 relative min-h-[300px] flex items-end gap-1">
+<!-- Simplified Visual Representation of a Multi-line Chart using bars and opacity -->
+<div class="flex-1 h-full flex flex-col-reverse gap-px group cursor-pointer">
+<div class="w-full bg-primary/40 h-[60%] rounded-t-sm group-hover:bg-primary/60 transition-all"></div>
+<div class="w-full bg-secondary/30 h-[20%] group-hover:bg-secondary/50 transition-all"></div>
+<div class="w-full bg-tertiary/20 h-[10%] group-hover:bg-tertiary/40 transition-all"></div>
+<p class="text-[10px] text-center mt-2 opacity-50">00:00</p>
+</div>
+<!-- Repeat visualization bars -->
+<div class="flex-1 h-full flex flex-col-reverse gap-px group">
+<div class="w-full bg-primary/40 h-[55%] rounded-t-sm"></div><div class="w-full bg-secondary/30 h-[25%]"></div><div class="w-full bg-tertiary/20 h-[12%]"></div>
+<p class="text-[10px] text-center mt-2 opacity-50">04:00</p>
+</div>
+<div class="flex-1 h-full flex flex-col-reverse gap-px group">
+<div class="w-full bg-primary/40 h-[75%] rounded-t-sm"></div><div class="w-full bg-secondary/30 h-[15%]"></div><div class="w-full bg-tertiary/20 h-[5%]"></div>
+<p class="text-[10px] text-center mt-2 opacity-50">08:00</p>
+</div>
+<div class="flex-1 h-full flex flex-col-reverse gap-px group">
+<div class="w-full bg-primary/40 h-[85%] rounded-t-sm"></div><div class="w-full bg-secondary/30 h-[10%]"></div><div class="w-full bg-tertiary/20 h-[3%]"></div>
+<p class="text-[10px] text-center mt-2 opacity-50">12:00</p>
+</div>
+<div class="flex-1 h-full flex flex-col-reverse gap-px group">
+<div class="w-full bg-primary/40 h-[70%] rounded-t-sm"></div><div class="w-full bg-secondary/30 h-[20%]"></div><div class="w-full bg-tertiary/20 h-[8%]"></div>
+<p class="text-[10px] text-center mt-2 opacity-50">16:00</p>
+</div>
+<div class="flex-1 h-full flex flex-col-reverse gap-px group">
+<div class="w-full bg-primary/40 h-[90%] rounded-t-sm"></div><div class="w-full bg-secondary/30 h-[5%]"></div><div class="w-full bg-tertiary/20 h-[2%]"></div>
+<p class="text-[10px] text-center mt-2 opacity-50">20:00</p>
+</div>
+<div class="flex-1 h-full flex flex-col-reverse gap-px group">
+<div class="w-full bg-primary/40 h-[65%] rounded-t-sm"></div><div class="w-full bg-secondary/30 h-[22%]"></div><div class="w-full bg-tertiary/20 h-[9%]"></div>
+<p class="text-[10px] text-center mt-2 opacity-50">23:59</p>
+</div>
+</div>
+<div class="mt-6 flex gap-6 border-t border-white/5 pt-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-label-md">SkySense Core</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-xs font-label-md">OpenWeather</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary"></span>
+<span class="text-xs font-label-md">WeatherAPI</span>
+</div>
+</div>
+</div>
+<!-- Top Locations -->
+<div class="glass-panel rounded-2xl p-6 flex flex-col">
+<div class="mb-6">
+<h2 class="text-xl font-bold text-on-surface">Top Locations</h2>
+<p class="text-sm text-on-surface-variant">Global hotspots by traffic</p>
+</div>
+<div class="flex-1 space-y-4">
+<div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">01</div>
+<div>
+<p class="text-sm font-bold">New York</p>
+<p class="text-[10px] text-on-surface-variant">United States</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">842K</p>
+<p class="text-[10px] text-emerald-400">+2.4%</p>
+</div>
+</div>
+<div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">02</div>
+<div>
+<p class="text-sm font-bold">Tokyo</p>
+<p class="text-[10px] text-on-surface-variant">Japan</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">715K</p>
+<p class="text-[10px] text-emerald-400">+5.1%</p>
+</div>
+</div>
+<div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">03</div>
+<div>
+<p class="text-sm font-bold">London</p>
+<p class="text-[10px] text-on-surface-variant">United Kingdom</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">650K</p>
+<p class="text-[10px] text-error">-0.8%</p>
+</div>
+</div>
+<div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">04</div>
+<div>
+<p class="text-sm font-bold">Paris</p>
+<p class="text-[10px] text-on-surface-variant">France</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">428K</p>
+<p class="text-[10px] text-emerald-400">+1.2%</p>
+</div>
+</div>
+<div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">05</div>
+<div>
+<p class="text-sm font-bold">Berlin</p>
+<p class="text-[10px] text-on-surface-variant">Germany</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">392K</p>
+<p class="text-[10px] text-emerald-400">+0.4%</p>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-2 border border-white/10 rounded-lg text-xs font-bold text-on-surface-variant hover:bg-white/5 transition-colors">View All Heatmaps</button>
+</div>
+<!-- Recent System Logs -->
+<div class="glass-panel rounded-2xl p-6 flex flex-col max-h-[400px]">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold text-on-surface">System Logs</h2>
+<span class="material-symbols-outlined text-on-surface-variant">more_horiz</span>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-2">
+<div class="flex gap-4 border-l-2 border-primary pl-4 py-1">
+<p class="text-[10px] font-bold text-on-surface-variant min-w-[50px]">14:22:01</p>
+<div>
+<p class="text-xs font-bold">API KEY ROTATION</p>
+<p class="text-[10px] text-on-surface-variant">Success: Cloudflare Edge #22</p>
+</div>
+</div>
+<div class="flex gap-4 border-l-2 border-error pl-4 py-1">
+<p class="text-[10px] font-bold text-on-surface-variant min-w-[50px]">14:19:45</p>
+<div>
+<p class="text-xs font-bold text-error">THROTTLING ALERT</p>
+<p class="text-[10px] text-on-surface-variant">User: ID_9283 exceeds rate limit</p>
+</div>
+</div>
+<div class="flex gap-4 border-l-2 border-primary pl-4 py-1">
+<p class="text-[10px] font-bold text-on-surface-variant min-w-[50px]">14:15:30</p>
+<div>
+<p class="text-xs font-bold">BACKUP COMPLETED</p>
+<p class="text-[10px] text-on-surface-variant">S3 Region: us-east-1</p>
+</div>
+</div>
+<div class="flex gap-4 border-l-2 border-tertiary pl-4 py-1">
+<p class="text-[10px] font-bold text-on-surface-variant min-w-[50px]">14:10:12</p>
+<div>
+<p class="text-xs font-bold text-tertiary">GEO-REPLICATION LAG</p>
+<p class="text-[10px] text-on-surface-variant">Region: EU-West (32ms delay)</p>
+</div>
+</div>
+<div class="flex gap-4 border-l-2 border-primary pl-4 py-1">
+<p class="text-[10px] font-bold text-on-surface-variant min-w-[50px]">13:55:21</p>
+<div>
+<p class="text-xs font-bold">KERNEL UPDATE</p>
+<p class="text-[10px] text-on-surface-variant">Node_B4 applied successfully</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback Management -->
+<div class="lg:col-span-2 glass-panel rounded-2xl p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-xl font-bold text-on-surface">User Feedback</h2>
+<p class="text-sm text-on-surface-variant">Recent ratings and community sentiment</p>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-secondary-container/30 border border-secondary/20 rounded-lg">
+<span class="text-secondary font-bold">4.8</span>
+<div class="flex">
+<span class="material-symbols-outlined text-[14px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px] text-secondary" style="font-variation-settings: 'FILL' 0.5;">star_half</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-primary/20 transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full" data-alt="A portrait of a smiling woman with glasses and blonde hair, looking friendly and satisfied, set against a modern office background with soft natural lighting and a clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUboRVCRzDFCXY2vwKNmJrweSXCPkvlxTtGafowGsltOCBTDS3m1nEgAwcKkaqTwJVoVrQNXLwIlIm7ztdihf0RNMm-WhXrkqOXfskjZQnWTU2nhnuL0GJHqUCswFLvcAmRRR2YHlkkoxf2nq0a96lsFxwoWu3IbDykulWU1g2qrYF9ldZ_cbf_VAx1jqbIKKhHyZIKelf5R8OnC65YVNlykkoX5xomlSAdfJEndXeaQCPQnO51qGuyLIgkeWb6OxzzRyql1TXU3Q"/>
+<div>
+<p class="text-xs font-bold">Sarah Jenkins</p>
+<p class="text-[10px] text-on-surface-variant">Premium User • 2h ago</p>
+</div>
+</div>
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant italic">"The precipitation alerts are incredibly accurate. Saved my farm from a surprise frost this morning. Highly recommend!"</p>
+<div class="mt-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-[10px] font-bold text-primary px-3 py-1 rounded bg-primary/10">Reply</button>
+<button class="text-[10px] font-bold text-on-surface-variant px-3 py-1 rounded hover:bg-white/10">Archive</button>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-primary/20 transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full" data-alt="A portrait of a middle-aged man with a beard and a thoughtful expression, wearing a gray sweater, set against a blurred background of a coastal landscape with cool, atmospheric lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8fV_7oLjLmRKfAr5MYmQDy8jXfmzulmcmJDTBxCyrRrHtkrti59OA9nkUAD_NCESwrAuo_KjZ3OnkhX-WA9GWKO95YZPZRo_ZgRrlu9MLpgetjnf_NvCn8o1SsVkie5i5A-MvEoRdoWSD4nvhE_zXi64EnZt5Xn5K61EIpWPxaPSVPWhVm3XIq0pIS4vVdmLvWoF1dPyWvPxqXDv2dZngK0foKnELET59fLNPW8nFhtsw6Qubt8B5piR7ulRYgbgfD3YUUeVK8_I"/>
+<div>
+<p class="text-xs font-bold">Marco Rossi</p>
+<p class="text-[10px] text-on-surface-variant">Standard User • 5h ago</p>
+</div>
+</div>
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[12px] text-white/20">star</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant italic">"Great UI, but the Travel Mode maps load a bit slow on mobile data. Otherwise, a solid tool for my hiking trips."</p>
+<div class="mt-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-[10px] font-bold text-primary px-3 py-1 rounded bg-primary/10">Reply</button>
+<button class="text-[10px] font-bold text-on-surface-variant px-3 py-1 rounded hover:bg-white/10">Archive</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="ml-64 w-full py-8 px-8 mt-auto flex flex-col md:flex-row justify-between items-center gap-4 glass-panel border-t border-white/5">
+<div class="flex flex-col md:flex-row items-center gap-6">
+<span class="font-label-md text-label-md font-bold text-on-surface">SkySense AI</span>
+<span class="text-on-surface-variant text-[12px]">© 2024 SkySense AI Precision Weather</span>
+</div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-on-surface text-xs transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface text-xs transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-on-surface text-xs transition-colors" href="#">API Documentation</a>
+</div>
+</footer>
+<script>
+        // Simple interactivity for the chart effect
+        document.querySelectorAll('.group').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                // Add any hover specific logic here if needed
+            });
+        });
+
+        // Simulating real-time data pulses
+        setInterval(() => {
+            const sessions = document.querySelector('h3:nth-of-type(1)'); // Just a target for example
+            // In a real app, we would update state here
+        }, 5000);
+    </script>
+</body></html>

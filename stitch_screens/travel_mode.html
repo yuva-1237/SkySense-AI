@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkySense AI | Travel Intelligence Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #0b1326;
+            color: #dae2fd;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(23, 31, 51, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(142, 213, 255, 0.3);
+            background: rgba(23, 31, 51, 0.6);
+        }
+        .weather-gradient-sf {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(11, 19, 38, 0) 100%);
+        }
+        .weather-gradient-tokyo {
+            background: linear-gradient(135deg, rgba(255, 196, 47, 0.1) 0%, rgba(11, 19, 38, 0) 100%);
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 3s infinite ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#31394d",
+                        "tertiary-fixed": "#ffdf9f",
+                        "primary-container": "#38bdf8",
+                        "surface-tint": "#7bd0ff",
+                        "tertiary-fixed-dim": "#f9bd22",
+                        "surface-dim": "#0b1326",
+                        "secondary-container": "#2f3aa3",
+                        "secondary": "#bdc2ff",
+                        "primary": "#8ed5ff",
+                        "on-tertiary": "#402d00",
+                        "background": "#0b1326",
+                        "on-surface": "#dae2fd",
+                        "surface": "#0b1326",
+                        "primary-fixed-dim": "#7bd0ff",
+                        "on-secondary-fixed": "#000767",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#dae2fd",
+                        "on-primary": "#00354a",
+                        "on-secondary": "#131e8c",
+                        "inverse-on-surface": "#283044",
+                        "surface-container-lowest": "#060e20",
+                        "on-background": "#dae2fd",
+                        "tertiary": "#ffc42f",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "primary-fixed": "#c4e7ff",
+                        "on-tertiary-container": "#584000",
+                        "on-secondary-fixed-variant": "#2f3aa3",
+                        "on-error": "#690005",
+                        "surface-container-high": "#222a3d",
+                        "on-primary-fixed-variant": "#004c69",
+                        "secondary-fixed-dim": "#bdc2ff",
+                        "on-secondary-container": "#a8afff",
+                        "on-surface-variant": "#bdc8d1",
+                        "secondary-fixed": "#e0e0ff",
+                        "on-primary-fixed": "#001e2c",
+                        "on-primary-container": "#004965",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#e1a800",
+                        "outline": "#87929a",
+                        "outline-variant": "#3e484f",
+                        "surface-variant": "#2d3449",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#131b2e",
+                        "inverse-primary": "#00668a",
+                        "surface-container": "#171f33",
+                        "surface-container-highest": "#2d3449",
+                        "on-tertiary-fixed": "#261a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "2rem",
+                        "gutter": "1.5rem",
+                        "unit": "8px",
+                        "stack-sm": "0.5rem",
+                        "stack-md": "1rem",
+                        "stack-lg": "2rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-md": ["Geist"],
+                        "body-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-md">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">SkySense AI</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Analytics</a>
+<a class="text-primary border-b-2 border-primary font-bold pb-1 font-label-md text-label-md" href="#">Travel</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Satellites</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-all">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-all">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional high-resolution headshot of a travel operations manager, clean studio lighting, neutral background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfcll86DpUBkeeftdh_UsS92VmxBnNDGfsOXEa43O9Krb_zgwV2ZoxJ6kO-VidY-IlHHYruJiLZ5jUYVRWGIA1wduFL3j2mw8hLFR7WxNYF25cTexyrsY9ACbSLlTpEn2PIvyD77J67mkxiYg31M_aSC2bnFG35YeSUkOGexO2TlOs8PHGu4xapDHHnpdCcMMysySACTUOeflsKA8FMgwvDapSDPndVbUQJD1_XggletiTcAGPpoXCB7NrzrC0dI0cGN9Am1jjqL4"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 flex flex-col p-stack-md gap-stack-sm bg-surface-container-low/90 backdrop-blur-2xl w-[320px] border-r border-white/5 shadow-2xl hidden lg:flex">
+<div class="flex items-center gap-3 mb-6 px-3">
+<div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">flight_takeoff</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary leading-tight">Travel Mode</h2>
+<p class="text-label-sm text-on-surface-variant opacity-70">Global Intelligence</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<button class="text-on-surface-variant flex items-center gap-unit p-3 hover:bg-white/5 rounded-xl hover:translate-x-1 transition-transform duration-200">
+<span class="material-symbols-outlined">air</span>
+<span class="font-label-md text-label-md">Atmospheric Flow</span>
+</button>
+<button class="text-on-surface-variant flex items-center gap-unit p-3 hover:bg-white/5 rounded-xl hover:translate-x-1 transition-transform duration-200">
+<span class="material-symbols-outlined">speed</span>
+<span class="font-label-md text-label-md">Transit Risk</span>
+</button>
+<button class="text-on-surface-variant flex items-center gap-unit p-3 hover:bg-white/5 rounded-xl hover:translate-x-1 transition-transform duration-200">
+<span class="material-symbols-outlined">dataset</span>
+<span class="font-label-md text-label-md">Logistics</span>
+</button>
+<button class="bg-secondary-container text-on-secondary-container rounded-xl flex items-center gap-unit p-3 hover:translate-x-1 transition-transform duration-200">
+<span class="material-symbols-outlined">backpack</span>
+<span class="font-label-md text-label-md">Packing AI</span>
+</button>
+<button class="text-on-surface-variant flex items-center gap-unit p-3 hover:bg-white/5 rounded-xl hover:translate-x-1 transition-transform duration-200">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-label-md text-label-md">Alert Center</span>
+</button>
+</div>
+<button class="mt-8 mx-3 bg-primary text-on-primary font-bold py-3 px-6 rounded-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+            New Trip
+        </button>
+<div class="mt-auto flex flex-col gap-1 border-t border-white/5 pt-4">
+<button class="text-on-surface-variant flex items-center gap-unit p-3 hover:bg-white/5 rounded-xl">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</button>
+<button class="text-on-surface-variant flex items-center gap-unit p-3 hover:bg-white/5 rounded-xl">
+<span class="material-symbols-outlined">archive</span>
+<span class="font-label-md text-label-md">Archive</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-[320px] pt-24 px-container-margin pb-12 min-h-screen">
+<!-- Header -->
+<header class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Travel Intelligence Hub</h1>
+<p class="text-body-md text-on-surface-variant">Real-time atmospheric analysis for your transpacific route.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-high rounded-full px-4 py-2 border border-white/5">
+<span class="w-2 h-2 rounded-full bg-green-400 animate-pulse-soft mr-2"></span>
+<span class="text-label-sm uppercase tracking-wider text-on-surface-variant">Systems Nominal</span>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Trip Comparison -->
+<section class="xl:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- SF Card -->
+<div class="glass-card rounded-2xl p-6 weather-gradient-sf relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-label-md text-primary uppercase tracking-widest">Departure</p>
+<h3 class="text-headline-md font-bold">San Francisco</h3>
+<p class="text-body-md text-on-surface-variant">SFO Terminal 3</p>
+</div>
+<span class="material-symbols-outlined text-4xl text-primary/60">cloud</span>
+</div>
+<div class="flex items-end gap-4 mb-8">
+<span class="text-display-lg font-display-lg leading-none">16°C</span>
+<div class="pb-2">
+<p class="text-label-md text-on-surface">Foggy</p>
+<p class="text-label-sm text-on-surface-variant">Local Time: 09:42 AM</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 border-t border-white/10 pt-4">
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">Wind</p>
+<p class="font-bold">12km/h</p>
+</div>
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">Visibility</p>
+<p class="font-bold">4.2km</p>
+</div>
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">Pressure</p>
+<p class="font-bold">1012 hPa</p>
+</div>
+</div>
+</div>
+<!-- Tokyo Card -->
+<div class="glass-card rounded-2xl p-6 weather-gradient-tokyo relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-label-md text-tertiary uppercase tracking-widest">Destination</p>
+<h3 class="text-headline-md font-bold">Tokyo</h3>
+<p class="text-body-md text-on-surface-variant">NRT Terminal 1</p>
+</div>
+<span class="material-symbols-outlined text-4xl text-tertiary/60" style="font-variation-settings: 'FILL' 1;">sunny</span>
+</div>
+<div class="flex items-end gap-4 mb-8">
+<span class="text-display-lg font-display-lg leading-none">24°C</span>
+<div class="pb-2">
+<p class="text-label-md text-on-surface">Clear Sky</p>
+<p class="text-label-sm text-on-surface-variant">Local Time: 01:42 AM</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 border-t border-white/10 pt-4">
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">Wind</p>
+<p class="font-bold">5km/h</p>
+</div>
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">Humidity</p>
+<p class="font-bold">62%</p>
+</div>
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">UV Index</p>
+<p class="font-bold">Low</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Alerts Side Card -->
+<section class="xl:col-span-4 flex flex-col gap-gutter">
+<div class="glass-card rounded-2xl p-6 flex flex-col h-full border-l-4 border-l-error">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-error">warning</span>
+<h3 class="font-bold text-headline-md">Transit Alerts</h3>
+</div>
+<div class="space-y-4 overflow-y-auto">
+<div class="bg-white/5 p-4 rounded-xl border border-white/5">
+<div class="flex justify-between mb-1">
+<p class="text-label-md font-bold text-on-surface">Turbulence Warning</p>
+<span class="text-label-sm text-error">High Risk</span>
+</div>
+<p class="text-label-sm text-on-surface-variant">North Pacific Jet Stream: Severe CAT expected between flight levels 320-380.</p>
+</div>
+<div class="bg-white/5 p-4 rounded-xl border border-white/5 opacity-80">
+<div class="flex justify-between mb-1">
+<p class="text-label-md font-bold text-on-surface">Heathrow Advisory</p>
+<span class="text-label-sm text-tertiary">Moderate</span>
+</div>
+<p class="text-label-sm text-on-surface-variant">Low visibility procedures in effect starting 04:00 UTC due to ground radiation fog.</p>
+</div>
+<div class="bg-white/5 p-4 rounded-xl border border-white/5 opacity-80">
+<div class="flex justify-between mb-1">
+<p class="text-label-md font-bold text-on-surface">Tokyo Rail Notice</p>
+<span class="text-label-sm text-primary">Low</span>
+</div>
+<p class="text-label-sm text-on-surface-variant">Keisei Skyliner experiencing 5 min delays due to track maintenance.</p>
+</div>
+</div>
+<button class="mt-6 w-full py-2 text-label-md font-bold border border-white/10 rounded-lg hover:bg-white/5 transition-colors">View All Risks</button>
+</div>
+</section>
+<!-- Route Timeline -->
+<section class="xl:col-span-8">
+<div class="glass-card rounded-2xl p-6">
+<h3 class="font-bold text-headline-md mb-8">Atmospheric Route Timeline</h3>
+<div class="relative pt-8 pb-4">
+<!-- Horizontal Line -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-white/10 -translate-y-1/2"></div>
+<div class="flex justify-between relative z-10">
+<!-- Step 1 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-bright border-2 border-primary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary">flight_takeoff</span>
+</div>
+<p class="font-bold text-label-md">SFO</p>
+<p class="text-label-sm text-on-surface-variant">16°C | Fog</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 rounded-full bg-primary mt-4 mb-8 ring-4 ring-primary/20"></div>
+<p class="font-bold text-label-md">Pacific Leg</p>
+<p class="text-label-sm text-on-surface-variant">-45°C | Clear</p>
+</div>
+<!-- Step 3 (Layover) -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-bright border-2 border-tertiary flex items-center justify-center mb-4 shadow-lg shadow-tertiary/10">
+<span class="material-symbols-outlined text-tertiary">beach_access</span>
+</div>
+<p class="font-bold text-label-md">Honolulu</p>
+<p class="text-label-sm text-on-surface-variant">28°C | Humid</p>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 rounded-full bg-error mt-4 mb-8 ring-4 ring-error/20"></div>
+<p class="font-bold text-label-md">West Pacific</p>
+<p class="text-label-sm text-error">Turbulence</p>
+</div>
+<!-- Step 5 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-bright border-2 border-tertiary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary">flight_land</span>
+</div>
+<p class="font-bold text-label-md">NRT</p>
+<p class="text-label-sm text-on-surface-variant">24°C | Sunny</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Packing AI -->
+<section class="xl:col-span-4">
+<div class="glass-card rounded-2xl p-6 h-full flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">backpack</span>
+<h3 class="font-bold text-headline-md">Packing AI</h3>
+</div>
+<span class="text-label-sm text-on-surface-variant bg-white/5 px-3 py-1 rounded-full">7-Day Forecast Analysis</span>
+</div>
+<div class="flex-grow space-y-4">
+<div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="p-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">dry_cleaning</span>
+</div>
+<div>
+<p class="text-label-md font-bold group-hover:text-primary transition-colors">Light-weight shell jacket</p>
+<p class="text-label-sm text-on-surface-variant">Tokyo morning humidity (82%) requires breathable layers.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="p-2 rounded-lg bg-secondary/10 text-secondary">
+<span class="material-symbols-outlined">ice_skating</span>
+</div>
+<div>
+<p class="text-label-md font-bold group-hover:text-secondary transition-colors">Waterproof footwear</p>
+<p class="text-label-sm text-on-surface-variant">40% chance of rain on Day 3 and 4 in Shinjuku.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="p-2 rounded-lg bg-tertiary/10 text-tertiary">
+<span class="material-symbols-outlined">umbrella</span>
+</div>
+<div>
+<p class="text-label-md font-bold group-hover:text-tertiary transition-colors">Compact Wind-proof Umbrella</p>
+<p class="text-label-sm text-on-surface-variant">Gusts expected up to 35km/h in coastal areas.</p>
+</div>
+</div>
+</div>
+<div class="mt-8 relative h-32 rounded-xl overflow-hidden grayscale contrast-125 opacity-40">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-detail macro shot of technical travel apparel textures, GORE-TEX fabric, waterproof zippers, deep navy and cyan lighting, professional product photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBamEaH1cjtxQ7tR5pUbi-0DOP7EBKxckMncZcnGHgjRMOiaAT3LjH640UxVM6HBS6dZGvDNrmUI4naETsf8yvmRaZY_R7_DDZT4rYYE5WIuWUAHQ7jMRMCzXqPuLrlxfy1AA4wCPkYOp_jd3KL92jLMMivhebLzM6re1w0-1R3gYjlCQDXGwmVBfWXZ4VMZL0ws9OhjQZIZPXnpOUQ6i7H3FVMdAks-yV3OzKuJO_KNZbpbxCktJDrtlsVRTFQMolzDmagIFrCC_Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Action Button - Only for Primary Action -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="w-14 h-14 rounded-full bg-primary text-on-primary shadow-xl shadow-primary/20 flex items-center justify-center hover:scale-110 active:scale-90 transition-all">
+<span class="material-symbols-outlined text-3xl">map</span>
+</button>
+</div>
+<script>
+        // Simple interactive micro-effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

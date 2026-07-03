@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkySense AI | Farmer Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#bdc2ff",
+                        "primary-fixed-dim": "#7bd0ff",
+                        "inverse-primary": "#00668a",
+                        "on-secondary-container": "#a8afff",
+                        "surface-container-high": "#222a3d",
+                        "outline-variant": "#3e484f",
+                        "on-background": "#dae2fd",
+                        "surface-container-highest": "#2d3449",
+                        "surface-container": "#171f33",
+                        "secondary-fixed-dim": "#bdc2ff",
+                        "tertiary-fixed-dim": "#f9bd22",
+                        "surface-variant": "#2d3449",
+                        "on-surface-variant": "#bdc8d1",
+                        "on-surface": "#dae2fd",
+                        "on-error-container": "#ffdad6",
+                        "background": "#0b1326",
+                        "on-primary": "#00354a",
+                        "tertiary": "#ffc42f",
+                        "secondary-container": "#2f3aa3",
+                        "on-tertiary": "#402d00",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-tertiary-container": "#584000",
+                        "on-secondary": "#131e8c",
+                        "surface-bright": "#31394d",
+                        "surface-container-low": "#131b2e",
+                        "on-secondary-fixed": "#000767",
+                        "on-primary-fixed-variant": "#004c69",
+                        "on-primary-container": "#004965",
+                        "tertiary-container": "#e1a800",
+                        "primary": "#8ed5ff",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary-fixed": "#ffdf9f",
+                        "primary-container": "#38bdf8",
+                        "outline": "#87929a",
+                        "on-secondary-fixed-variant": "#2f3aa3",
+                        "primary-fixed": "#c4e7ff",
+                        "inverse-on-surface": "#283044",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#060e20",
+                        "on-error": "#690005",
+                        "surface-dim": "#0b1326",
+                        "surface-tint": "#7bd0ff",
+                        "secondary-fixed": "#e0e0ff",
+                        "surface": "#0b1326",
+                        "on-primary-fixed": "#001e2c",
+                        "agri-green": "#2d4a3e",
+                        "agri-amber": "#c48b36"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "2rem",
+                        "gutter": "1.5rem",
+                        "stack-sm": "0.5rem",
+                        "stack-lg": "2rem",
+                        "unit": "8px",
+                        "stack-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "label-md": ["Geist"],
+                        "display-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            font-family: 'Geist', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .agri-gradient {
+            background: linear-gradient(135deg, rgba(45, 74, 62, 0.2) 0%, rgba(11, 19, 38, 0) 100%);
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="dark selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 h-16 bg-surface/80 backdrop-blur-xl dark:bg-surface/80 border-b border-white/10 shadow-md">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold tracking-tight text-primary">SkySense AI</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Maps</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Analytics</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Health Center</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Travel Mode</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Farmer Mode</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-white/5 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-white/5 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<span class="text-on-surface-variant text-label-md font-label-md px-2">°C/°F</span>
+<div class="flex items-center gap-2 bg-white/5 rounded-full pl-1 pr-4 py-1 cursor-pointer hover:bg-white/10 transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a modern farmer in high-tech agricultural gear, soft cinematic lighting, blue and emerald tones, high-end photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfDUIDnmrABbVHzumLWw1HSFiZvQDzleWohqsZ_3J8WERwBCy-zcUsIhsGKRyJTNywHxLu-oWZNVxJLTEoKi7nF9PNum014dtLGPm6lCmuhDXdXQRAGeo9veRO7a3e8iIA8-NBo1fFE2A5ELJ3ATh852yDtc7X-Ku37M-fBwgTOP6doTu5IAXAem1Vc5W3b7dy_7RIM7oNhKupdZgRqtQeLFrRyitb1uc0YWcT6HJkvu6KI_VmEvy481b8Spwu8YwEhL7t8_OURCI"/>
+</div>
+<span class="text-label-md font-label-md">Profile</span>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col z-40 bg-surface-container/60 backdrop-blur-2xl dark:bg-surface-container-high/60 border-r border-white/10 shadow-2xl pt-20">
+<div class="px-6 mb-8">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">SkySense AI</h2>
+<p class="text-label-sm text-on-surface-variant opacity-70">Weather Intelligence</p>
+</div>
+<nav class="flex-1 flex flex-col">
+<a class="text-on-surface-variant hover:bg-white/5 px-6 py-3 flex items-center gap-4 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-6 py-3 flex items-center gap-4 transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md">Maps</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-6 py-3 flex items-center gap-4 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md">Analytics</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-6 py-3 flex items-center gap-4 transition-colors" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-md">Health Center</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-6 py-3 flex items-center gap-4 transition-colors" href="#">
+<span class="material-symbols-outlined">flight</span>
+<span class="font-label-md">Travel Mode</span>
+</a>
+<a class="bg-primary-container/20 text-primary-container border-r-4 border-primary-container px-6 py-3 flex items-center gap-4" href="#">
+<span class="material-symbols-outlined">agriculture</span>
+<span class="font-label-md">Farmer Mode</span>
+</a>
+</nav>
+<div class="p-4">
+<button class="w-full py-3 bg-primary text-on-primary rounded-xl font-label-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+                AI Assistant
+            </button>
+</div>
+<div class="mt-auto border-t border-white/5 p-4 flex flex-col gap-1">
+<a class="text-on-surface-variant hover:bg-white/5 px-4 py-2 rounded-lg flex items-center gap-4 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-label-sm">Settings</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/5 px-4 py-2 rounded-lg flex items-center gap-4 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="text-label-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 pt-24 px-8 pb-12">
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Farmer Intelligence Center</h1>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1 text-agri-amber font-label-md">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                        Northern Fields, Plot B-14
+                    </span>
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant opacity-30"></span>
+<span class="text-on-surface-variant font-label-md">Last sync: 2 mins ago</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="glass-card px-4 py-3 rounded-xl flex items-center gap-4 border-agri-amber/30">
+<div class="p-2 bg-agri-amber/20 rounded-lg text-agri-amber">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Alert</p>
+<p class="text-on-surface font-label-md">Potential Frost: 03:00 AM</p>
+</div>
+</div>
+<div class="glass-card px-4 py-3 rounded-xl flex items-center gap-4 border-primary/30">
+<div class="p-2 bg-primary/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Irrigation</p>
+<p class="text-on-surface font-label-md">System Idle</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Field Map Heatmap (Level 0 Visualization) -->
+<div class="md:col-span-8 h-[450px] glass-card rounded-3xl overflow-hidden relative group">
+<div class="absolute inset-0 z-0 bg-surface-container-low">
+<img class="w-full h-full object-cover opacity-80 mix-blend-lighten" data-alt="A top-down satellite view of segmented agricultural fields with a vibrant digital heatmap overlay showing soil moisture variations in shades of emerald, gold, and deep blue. High-precision technical aesthetic, dark atmospheric UI style." data-location="Iowa Farmland" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0IRbtVmcjwY9JJ9Wc7wHEAsutTP7qYe_hYjtjS5bl5yuVwsKCjnBseQOdCNCQtx0DPONKlA9Q7DAjyNgYBgymJW-4dfGRFLGhNtPUM6_HTVxcx6tlPTdxAel0rKhckMhDWDHhu5dRCQOInqbP9by3Nih3X2UhzKQ3CUnvGhm5h0imEZTRdMmXT4nUXQVdT7Oh_JcmSnLreLZbk6O3EqEwX5OaBhk7rUYZ705pG0FPVNaipcc6O0bcDepuXU_yyqMV349l100105A"/>
+</div>
+<!-- Interactive Controls -->
+<div class="absolute top-6 left-6 z-10 flex flex-col gap-2">
+<div class="glass-card p-1.5 rounded-full flex gap-1">
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary text-label-sm font-bold">Moisture</button>
+<button class="px-4 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-label-sm">Nutrients</button>
+<button class="px-4 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-label-sm">Yield Prob.</button>
+</div>
+</div>
+<div class="absolute bottom-6 right-6 z-10">
+<div class="glass-card p-4 rounded-2xl flex flex-col gap-3 max-w-[200px]">
+<p class="text-label-sm text-on-surface-variant">Zone Health Score</p>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[82%]"></div>
+</div>
+<span class="text-label-md font-bold text-primary">82%</span>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none"></div>
+</div>
+<!-- Soil Intelligence -->
+<div class="md:col-span-4 glass-card rounded-3xl p-6 flex flex-col agri-gradient">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline-md text-headline-md text-on-surface">Soil Intelligence</h3>
+<span class="material-symbols-outlined text-primary">info</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">opacity</span>
+</div>
+<div class="flex-1">
+<p class="text-label-sm text-on-surface-variant uppercase tracking-widest">Moisture (10cm)</p>
+<div class="flex items-end gap-2">
+<span class="text-headline-md text-on-surface">32.4</span>
+<span class="text-label-md text-on-surface-variant mb-1">% vol</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-agri-green font-bold text-label-md">+2.1%</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-agri-amber/10 border border-agri-amber/20 flex items-center justify-center text-agri-amber">
+<span class="material-symbols-outlined">thermostat</span>
+</div>
+<div class="flex-1">
+<p class="text-label-sm text-on-surface-variant uppercase tracking-widest">Temp at Depth</p>
+<div class="flex items-end gap-2">
+<span class="text-headline-md text-on-surface">18.2</span>
+<span class="text-label-md text-on-surface-variant mb-1">°C</span>
+</div>
+</div>
+<div class="text-right text-label-sm text-on-surface-variant">Ideal</div>
+</div>
+<div class="pt-6 border-t border-white/5">
+<p class="text-label-sm text-on-surface-variant uppercase mb-4 tracking-widest">Nutrient Estimates</p>
+<div class="grid grid-cols-3 gap-2 text-center">
+<div class="glass-card p-3 rounded-xl border-white/5">
+<p class="text-label-sm text-on-surface-variant">Nitrogen</p>
+<p class="text-label-md font-bold text-on-surface">Med</p>
+</div>
+<div class="glass-card p-3 rounded-xl border-white/5">
+<p class="text-label-sm text-on-surface-variant">Phos.</p>
+<p class="text-label-md font-bold text-agri-green">Opt.</p>
+</div>
+<div class="glass-card p-3 rounded-xl border-white/5">
+<p class="text-label-sm text-on-surface-variant">Potass.</p>
+<p class="text-label-md font-bold text-on-surface">High</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Precipitation Chart -->
+<div class="md:col-span-7 glass-card rounded-3xl p-8 relative overflow-hidden">
+<div class="flex items-center justify-between mb-8 relative z-10">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Precipitation Forecast</h3>
+<p class="text-label-md text-on-surface-variant">7-Day high-resolution accumulation</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-white/5 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-4 relative z-10">
+<!-- Placeholder Chart Bars -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-500 group-hover:bg-primary/40 h-[20%]"></div>
+<span class="text-label-sm text-on-surface-variant">Mon</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-500 group-hover:bg-primary/40 h-[45%] relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-primary font-bold text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">12mm</div>
+</div>
+<span class="text-label-sm text-on-surface-variant">Tue</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/60 rounded-t-lg transition-all duration-500 group-hover:bg-primary/80 h-[85%] relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-primary font-bold text-label-sm">28mm</div>
+</div>
+<span class="text-label-sm text-on-surface">Wed</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-500 group-hover:bg-primary/40 h-[15%]"></div>
+<span class="text-label-sm text-on-surface-variant">Thu</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-500 group-hover:bg-primary/40 h-[10%]"></div>
+<span class="text-label-sm text-on-surface-variant">Fri</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-500 group-hover:bg-primary/40 h-[40%]"></div>
+<span class="text-label-sm text-on-surface-variant">Sat</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-500 group-hover:bg-primary/40 h-[60%]"></div>
+<span class="text-label-sm text-on-surface-variant">Sun</span>
+</div>
+</div>
+<!-- Atmospheric Detail -->
+<div class="absolute bottom-0 right-0 w-64 h-64 pointer-events-none opacity-20">
+
+</div>
+</div>
+<!-- Crop Advisory & GDD -->
+<div class="md:col-span-5 grid grid-rows-2 gap-6">
+<!-- AI Advisory -->
+<div class="glass-card rounded-3xl p-6 border-l-4 border-l-primary flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">AI Crop Advisor</h3>
+</div>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+                            "Conditions for <span class="text-on-surface font-bold">Winter Wheat</span> plot are trending dry. Recommend activating Zone B irrigation for 45 mins between 18:00 and 20:00 to maximize absorption."
+                        </p>
+</div>
+<div class="flex items-center gap-4 mt-6">
+<button class="px-6 py-2 bg-primary-container/20 text-primary-container rounded-xl font-label-md hover:bg-primary-container/30 transition-colors">Apply Schedule</button>
+<button class="text-on-surface-variant text-label-md hover:text-on-surface transition-colors">Dismiss</button>
+</div>
+</div>
+<!-- GDD Tracking -->
+<div class="glass-card rounded-3xl p-6 flex flex-col">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-label-md text-on-surface uppercase tracking-widest">Growing Degree Days (GDD)</h3>
+<span class="text-agri-amber font-bold text-label-md">Phase: Booting</span>
+</div>
+<div class="flex-1 flex items-center gap-8">
+<div class="relative w-24 h-24">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="3"></path>
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#f9bd22" stroke-dasharray="72, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="text-headline-md text-on-surface">1,240</span>
+</div>
+</div>
+<div class="flex-1 space-y-2">
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span>Accumulated GDD</span>
+<span>Target: 1,850</span>
+</div>
+<div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-agri-amber w-[67%]"></div>
+</div>
+<p class="text-label-sm text-on-surface-variant italic">Est. Harvest Window: Sept 12 - Sept 18</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Severe Weather Log -->
+<div class="md:col-span-12 glass-card rounded-3xl p-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Severe Weather Watch</h3>
+<div class="flex items-center gap-2 px-3 py-1 bg-error-container/20 border border-error-container/30 rounded-full text-error text-label-sm">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                        Active Warning
+                    </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-4 rounded-2xl bg-white/5 flex items-start gap-4 border border-white/5">
+<div class="p-2 bg-error/20 rounded-xl text-error">
+<span class="material-symbols-outlined">ac_unit</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Frost Alert</p>
+<p class="text-label-sm text-on-surface-variant">Temperatures dropping below 2°C at 04:00 AM for 3 hours.</p>
+</div>
+</div>
+<div class="p-4 rounded-2xl bg-white/5 flex items-start gap-4 border border-white/5 opacity-60">
+<div class="p-2 bg-agri-amber/20 rounded-xl text-agri-amber">
+<span class="material-symbols-outlined">air</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">High Wind</p>
+<p class="text-label-sm text-on-surface-variant">Gusts up to 45km/h expected tomorrow afternoon.</p>
+</div>
+</div>
+<div class="p-4 rounded-2xl bg-white/5 flex items-start gap-4 border border-white/5 opacity-60">
+<div class="p-2 bg-primary/20 rounded-xl text-primary">
+<span class="material-symbols-outlined">cloudy_snowing</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Heavy Rain</p>
+<p class="text-label-sm text-on-surface-variant">Accumulation alert for Wed (Plot A drainage watch).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-6 mt-auto flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest/90 backdrop-blur-md dark:bg-surface-container-lowest/90 border-t border-white/5">
+<div class="flex flex-col md:flex-row items-center gap-6">
+<span class="font-label-md text-label-md font-bold text-on-surface">SkySense AI</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60">© 2024 SkySense AI Precision Weather</span>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-all" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-all" href="#">API Documentation</a>
+<div class="flex items-center gap-3 border-l border-white/10 pl-6">
+<span class="text-label-sm text-primary">Popular:</span>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-all" href="#">New York</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-all" href="#">London</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-all" href="#">Tokyo</a>
+</div>
+</div>
+</footer>
+<!-- FAB for Contextual Action -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group">
+<span class="material-symbols-outlined text-[32px] group-hover:rotate-12 transition-transform">monitoring</span>
+<div class="absolute right-full mr-4 bg-surface-container-highest text-on-surface px-4 py-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 shadow-xl">
+            Quick Analysis Plot
+        </div>
+</button>
+<script>
+        // Simple micro-interaction for the map area
+        const mapArea = document.querySelector('.group');
+        if(mapArea) {
+            mapArea.addEventListener('mousemove', (e) => {
+                const { left, top, width, height } = mapArea.getBoundingClientRect();
+                const x = (e.clientX - left) / width;
+                const y = (e.clientY - top) / height;
+                mapArea.style.transform = `perspective(1000px) rotateX(${(y - 0.5) * 2}deg) rotateY(${(x - 0.5) * -2}deg)`;
+            });
+            mapArea.addEventListener('mouseleave', () => {
+                mapArea.style.transform = `none`;
+            });
+        }
+    </script>
+</body></html>

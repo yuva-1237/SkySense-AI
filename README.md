@@ -432,10 +432,15 @@ SkySense-AI/
 │
 ├── 📁 docs/                        # Documentation assets
 │   └── 📁 screenshots/             # App screenshots
-│       ├── home.png                # Home / Weather view
-│       ├── dashboard.png           # Main dashboard
-│       ├── map.png                 # Interactive map
+│       ├── weather.png             # Live weather dashboard
+│       ├── charts.png              # Hourly & 10-day forecast charts
+│       ├── dashboard.png           # Main dashboard overview
+│       ├── home.png                # Home / weather detail
+│       ├── map.png                 # Interactive weather map
 │       ├── chat.png                # AI Assistant chat
+│       ├── farmer.png              # Farmer mode / agricultural AI
+│       ├── oversight.png           # System oversight & analytics
+│       ├── settings.png            # Account & settings
 │       ├── login.png               # Sign-in screen
 │       └── register.png            # Registration screen
 │
@@ -667,29 +672,45 @@ FIREBASE_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE
 
 ## 📸 Screenshots
 
-> All screenshots show the live, production-quality SkySense AI application — dark glassmorphism UI with real weather data.
+> All screenshots below are taken directly from the live SkySense AI application — dark glassmorphism UI, real weather data, zero placeholders.
 
 ---
 
-### 🏠 Home — Weather Detail View
+### 📊 Live Weather Dashboard
 
-*Detailed weather report with temperature line charts, UV index gauges, wind speed gauges, and real-time precipitation data:*
+*Real-time weather for Poonamallee, India — 34.2°C, Partly Cloudy. Shows UV Index, Air Quality (PM2.5), Wind State, and Humidity at a glance:*
+
+![Live Weather Dashboard](docs/screenshots/weather.png)
+
+---
+
+### 📈 Hourly & 10-Day Forecast Charts
+
+*Interactive Chart.js visualizations — Hourly Outlook (3-hour intervals) and 10-Day Max/Min Temperature Outlook, with Clothing Advice, Allergy & Health, and Transit & Travel insights:*
+
+![Forecast Charts](docs/screenshots/charts.png)
+
+---
+
+### 🏠 Home — Full Weather Detail View
+
+*Scrollable weather detail view with temperature trends, wind gauges, UV index, and precipitation breakdown:*
 
 ![Home View](docs/screenshots/home.png)
 
 ---
 
-### 📊 Main Dashboard
+### 🌐 Extended Dashboard Overview
 
-*Live weather dashboard showing current conditions, air quality parameters, allergen levels, and farming insights:*
+*Dashboard overview showing live weather observations, air quality parameters, allergen levels, and farming insights:*
 
-![Main Dashboard](docs/screenshots/dashboard.png)
+![Dashboard Overview](docs/screenshots/dashboard.png)
 
 ---
 
 ### 🤖 AI Assistant
 
-*Conversational AI chatbot grounded in live weather data — with voice input and streaming responses:*
+*Conversational AI chatbot powered by Google Gemini — grounded in live weather data with streaming SSE responses and voice input:*
 
 ![AI Chatbot](docs/screenshots/chat.png)
 
@@ -697,9 +718,33 @@ FIREBASE_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE
 
 ### 🗺️ Interactive Weather Map
 
-*Leaflet.js interactive map with real-time Rain, Cloud, and Wind overlays and click-to-search:*
+*Leaflet.js interactive map with real-time Rain, Cloud, and Wind overlay layers, GPS detection, and click-to-search:*
 
 ![Interactive Map](docs/screenshots/map.png)
+
+---
+
+### 🌾 Farmer Mode — Agricultural Intelligence Dashboard
+
+*AI-powered agricultural dashboard showing Estimated Soil Moisture (70%), Evapotranspiration Rate (4.5 mm/day), Irrigation Advisory, and real-time Crop Protection Alerts:*
+
+![Farmer Mode](docs/screenshots/farmer.png)
+
+---
+
+### 🖥️ System Oversight & Analytics
+
+*Real-time server monitoring panel — Cache Hit Ratio (79.5%), Rate Limit Overhead, Server Response Time (14 ms), and live log stream:*
+
+![System Oversight](docs/screenshots/oversight.png)
+
+---
+
+### ⚙️ Account & Settings
+
+*User profile management — Display Name, Temperature Unit preference, Default City, Data Export, and Account Deletion:*
+
+![Account & Settings](docs/screenshots/settings.png)
 
 ---
 
@@ -713,7 +758,7 @@ FIREBASE_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE
 
 ### 👤 Authentication — Register
 
-*User registration screen with name, email, and password strength validation:*
+*User registration with name, email, and password strength validation:*
 
 ![Registration](docs/screenshots/register.png)
 

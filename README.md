@@ -428,18 +428,16 @@ SkySense-AI/
 │   └── package.json
 │
 ├── 📁 assets/                      # Static assets
-│   └── banner.png                  # Project banner (add your own)
+│   └── banner.png                  # Project banner
 │
 ├── 📁 docs/                        # Documentation assets
-│   └── 📁 screenshots/             # App screenshots (add yours here)
-│       ├── home.png
-│       ├── dashboard.png
-│       ├── weather.png
-│       ├── map.png
-│       ├── chat.png
-│       ├── profile.png
-│       ├── settings.png
-│       └── mobile.png
+│   └── 📁 screenshots/             # App screenshots
+│       ├── home.png                # Home / Weather view
+│       ├── dashboard.png           # Main dashboard
+│       ├── map.png                 # Interactive map
+│       ├── chat.png                # AI Assistant chat
+│       ├── login.png               # Sign-in screen
+│       └── register.png            # Registration screen
 │
 ├── Dockerfile                      # Docker container definition
 ├── docker-compose.yml              # Multi-service orchestration
@@ -669,40 +667,54 @@ FIREBASE_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE
 
 ## 📸 Screenshots
 
-Here are the actual application views of SkySense AI showing its dark glassmorphism layout and modern aesthetics:
-
-### 🏠 Home View (London)
-Detailed weather report for London with temperature line charts, UV index gauges, wind speed gauges, and real-time precipitation breakdowns:
-![London Dashboard](docs/screenshots/home.png)
+> All screenshots show the live, production-quality SkySense AI application — dark glassmorphism UI with real weather data.
 
 ---
 
-### 📊 Dashboard View (Manchester)
-Initial default view displaying live weather observations, air quality parameters, allergen lists, and farming insights for Manchester:
-![Manchester Dashboard](docs/screenshots/dashboard.png)
+### 🏠 Home — Weather Detail View
+
+*Detailed weather report with temperature line charts, UV index gauges, wind speed gauges, and real-time precipitation data:*
+
+![Home View](docs/screenshots/home.png)
 
 ---
 
-### 🗺️ Interactive Weather Maps
-Interactive geographic overlay map showing real-time atmospheric data:
-![Interactive Map](docs/screenshots/map.png)
+### 📊 Main Dashboard
+
+*Live weather dashboard showing current conditions, air quality parameters, allergen levels, and farming insights:*
+
+![Main Dashboard](docs/screenshots/dashboard.png)
 
 ---
 
-### 🤖 AI Assistant Chat View
-Conversational AI chat interface grounded in live weather reports with speech recognition input:
+### 🤖 AI Assistant
+
+*Conversational AI chatbot grounded in live weather data — with voice input and streaming responses:*
+
 ![AI Chatbot](docs/screenshots/chat.png)
 
 ---
 
-### 🔐 Sign In Portal
-Secure email/password and single sign-on Google popup authentication modal:
+### 🗺️ Interactive Weather Map
+
+*Leaflet.js interactive map with real-time Rain, Cloud, and Wind overlays and click-to-search:*
+
+![Interactive Map](docs/screenshots/map.png)
+
+---
+
+### 🔐 Authentication — Sign In
+
+*Secure email/password and Google OAuth sign-in with Firebase Authentication:*
+
 ![Sign In](docs/screenshots/login.png)
 
 ---
 
-### 👤 Registration Screen
-User creation screen with inputs validating name, email, and password strength:
+### 👤 Authentication — Register
+
+*User registration screen with name, email, and password strength validation:*
+
 ![Registration](docs/screenshots/register.png)
 
 ---
@@ -1440,7 +1452,7 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for full text.
 ```
 MIT License
 
-Copyright (c) 2026 [Your Name]
+Copyright (c) 2026 Yuvathilagan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1465,7 +1477,7 @@ copies or substantial portions of the Software.
 *Full Stack Developer · AI Engineer · Open Source Contributor*
 
 [![GitHub](https://img.shields.io/badge/GitHub-@yuva--1237-181717?style=for-the-badge&logo=github)](https://github.com/yuva-1237)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/yuva-1237)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/yuvathilagan)
 [![Email](https://img.shields.io/badge/Email-yuva1237@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:yuva1237@gmail.com)
 
 > *"Building intelligent systems that make sense of the world — one API call at a time."*
